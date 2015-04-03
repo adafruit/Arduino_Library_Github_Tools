@@ -91,8 +91,8 @@ if __name__ == '__main__':
             libfile.write('name={0}\n'.format(name))
             # Write version, autho, and maintainer.
             libfile.write('version={0}\n'.format(args.version))
-            libfile.write('author={0}\n'.format(args.author))
-            libfile.write('maintainer={0}\n'.format(args.maintainer))
+            libfile.write('author={0}\n'.format(author))
+            libfile.write('maintainer={0}\n'.format(maintainer))
             # Use repo description as sentence and paragraph description.  If no
             # description is assigned to the repo then just use the repo name.
             description = repo.description
