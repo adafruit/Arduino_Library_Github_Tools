@@ -76,8 +76,8 @@ if __name__ == '__main__':
     for repo_name in os.listdir('.'):
         # Skip this item if it's not a directory or it doesn't have a
         # library.properties file inside it.
-        if not os.isdir(repo_name) or not os.path.exists(os.path.join(repo_name, 'library.properties')):
-            print('Skipping {0} because it is not a directory with library.properties...')
+        if not os.path.isdir(repo_name) or not os.path.exists(os.path.join(repo_name, 'library.properties')):
+            print('Skipping {0} because it is not a directory with library.properties...'.format(repo_name))
             continue
         # Get associated repository from Github and check if a library.properties
         # file already exists.  Skip processing this repo if a file exists.
@@ -86,7 +86,7 @@ if __name__ == '__main__':
             lib = repo.get_contents('library.properties')
             if lib is not None:
                 # Found a library.properties file.  Skip processing this repo.
-                print('Found library.properties in {0}, skipping...'.format(repo_name))
+                print('Found existing library.properties for {0} on Github, skipping...'.format(repo_name))
                 continue
         except UnknownObjectException:
             # Do nothing if library.properties file doesn't exist.  Continue on

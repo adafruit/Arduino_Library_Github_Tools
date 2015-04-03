@@ -100,6 +100,58 @@ be set to provide these values like (assuming a bash/Linux environment):
     export GITHUB_USERNAME=foo GITHUB_PASSWORD=bar
     python find_libraries.py
 
+First generate a list of all public Arduino libraries for the adafruit Github
+organization.  Save the output to the file adafruit_arduino_libraries.txt:
+
+    python find_libraries.py --type public adafruit > adafruit_arduino_libraries.txt
+
+Now examine the output file and remove any lines that are repositories which are
+not Arduino libraries or which you explicitly don't want to process further.
+
+Note that before you process the entire list it would be prudent to make a list
+with only one or two libraries and use it for the next steps to do a 'dry run'
+of generating properties, uploading properties, and tagging releases.  Once
+everything looks good, then run the full list through all the steps.
+
+Next generate all the library.properties files and save them in a subfolder
+called arduino_libs.  Also set a nicer author and maintainer name.  Notice the 
+list of libraries from the previous step is piped to the script's standard input.
+
+    python generate_properties.py --output arduino_libs --author "Adafruit" --maintainer "Adafruit <info@adafruit.com>" adafruit < adafruit_arduino_libraries.txt
+
+Go through the library.properties files inside the arduino_libs subfolder
+hiearchy and fix up any descriptions, names, etc.  Be sure to set a sensible
+category as the default is 'Other' (see [this page][2] for the list of possible
+categories).
+
+Now upload all the library.properties files inside the arduino_libs subfolder
+hiearchy:
+
+    python upload_properties.py --root arduino_libs adafruit
+
+Create and tag a 1.0.0 release for each library on Github by running (again
+notice the input is piped in from the list of libraries generated earlier):
+
+    python create_releases.py adafruit < adafruit_arduino_libraries.txt
+
+Finally generate the list of Arduino library URLs to send to the Arduino team.
+The output will be piped to a file adafruit_arduino_library_urls.txt that is
+in the formated needed by the Arduino library system.
+
+    python generate_list.py adafruit < adafruit_arduino_libraries.txt > adafruit_arduino_library_urls.txt
+
+Now send the adafruit_arduino_library_urls.txt file to the Arduino team in an
+issue on their Github repository (see [this page][4] for details)!
+
+Be aware that as Arduino libraries are changed on your Github repository they
+will NOT be automatically picked up by Arduino's library system.  Only when a
+new tagged release is created will Arduino pick up the library as new.  For
+example if a library has a tagged release with version 1.0.0 and new fixes are
+integrated then be sure to create a new tagged release with a higher version,
+like 1.0.1, after integrating the fixes.  Arduino's library system should pick
+up the new tag & release after processing the library again (apparently happens
+every few hours).
+
 License
 -------
 

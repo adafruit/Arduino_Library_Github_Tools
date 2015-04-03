@@ -80,6 +80,10 @@ if __name__ == '__main__':
 
     # Read reposities from standard input and process each one.
     for repo_name in sys.stdin:
+        repo_name = repo_name.strip()
+        # Skip blank lines.
+        if repo_name == '':
+            continue
         # Get associated repository from Github and check if a library.properties
         # file already exists.  Skip processing this repo if a library.properties
         # file does not exist.

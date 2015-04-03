@@ -71,6 +71,9 @@ if __name__ == '__main__':
     # Process all Arduino library names from standard input.
     for repo_name in sys.stdin:
         repo_name = repo_name.strip()
+        # Skip blank lines.
+        if repo_name == '':
+            continue
         print('Processing {0}...'.format(repo_name))
         # Get repository from github to find its description and other metadata.
         repo = root.get_repo(repo_name)

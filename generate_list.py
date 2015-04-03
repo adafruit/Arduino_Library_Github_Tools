@@ -44,7 +44,9 @@ if __name__ == '__main__':
     # Process all Arduino library names from standard input.
     for repo_name in sys.stdin:
         repo_name = repo_name.strip()
-        # Get repository from github to find its description and other metadata.
+        # Skip blank lines.
+        if repo_name == '':
+            continue        # Get repository from github to find its description and other metadata.
         repo = root.get_repo(repo_name)
         # Print out git URL and repository type.
         url = repo.clone_url
