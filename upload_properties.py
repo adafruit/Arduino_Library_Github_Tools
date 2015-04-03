@@ -11,7 +11,6 @@ library.properties file will be processed.
 """
 import argparse
 import base64
-import glob
 import os
 import sys
 
