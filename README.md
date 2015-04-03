@@ -85,7 +85,7 @@ parameter to print usage information.  For example run:
 To see usage information about the find_libraries.py script printed.
 
 In general each script needs to access Github using the credentials of a user
-with read and write access to Arduino libraries on Github.  Credentials can be
+with read and write access to your Arduino libraries on Github.  Credentials can be
 passed to each script either as command line parameters or through environment
 variables (and if both are present values given as command line parameters take
 precedence).  For example to specify credentials as command line parameters
@@ -100,10 +100,27 @@ be set to provide these values like (assuming a bash/Linux environment):
     export GITHUB_USERNAME=foo GITHUB_PASSWORD=bar
     python find_libraries.py
 
+To explain the usage of the scripts follow a walkthrough below of how Adafruit's
+libraries were populated using them.  For brevity all of the script calls below
+will omit the --username and --password parameters, but remember those are
+required (or the GITHUB_USERNAME and GITHUB_PASSWORD environment variables
+need to be set).
+
 First generate a list of all public Arduino libraries for the adafruit Github
 organization.  Save the output to the file adafruit_arduino_libraries.txt:
 
     python find_libraries.py --type public adafruit > adafruit_arduino_libraries.txt
+
+The --type parameter allows you to filter to a specific type of repository
+like public ones (run the script with just the --help parameter to see possible
+options).
+
+The adafruit parameter is the name of the Github user/organization to scan for
+Arduino libraries.  Change this to your Github user/organization name.
+
+If you have a lot of of repositories on Github the command can take some time to
+run as each repository is individually examined.  A full scan of Adafruit's 300+
+repositories took about 5 minutes.
 
 Now examine the output file and remove any lines that are repositories which are
 not Arduino libraries or which you explicitly don't want to process further.
@@ -114,39 +131,60 @@ of generating properties, uploading properties, and tagging releases.  Once
 everything looks good, then run the full list through all the steps.
 
 Next generate all the library.properties files and save them in a subfolder
-called arduino_libs.  Also set a nicer author and maintainer name.  Notice the 
-list of libraries from the previous step is piped to the script's standard input.
+called arduino_libs using the command below:
 
     python generate_properties.py --output arduino_libs --author "Adafruit" --maintainer "Adafruit <info@adafruit.com>" adafruit < adafruit_arduino_libraries.txt
 
-Go through the library.properties files inside the arduino_libs subfolder
-hiearchy and fix up any descriptions, names, etc.  Be sure to set a sensible
+The --output parameter specifies a subdirectory to create that will be the root
+of all the generated library.properties files (if not specified the current
+directory will be used).
+
+The --author and --maintainer parameters specify nicer names for those properties
+in the generated files.  
+
+Again the Github user/organization name is specified as the only positional
+parameter.
+
+Notice the list of Arduino libraries generated earlier is piped as standard input
+to the script.
+
+Now go through the library.properties files inside the arduino_libs subfolder
+hierarchy and fix up any descriptions, names, etc.  Be sure to set a sensible
 category as the default is 'Other' (see [this page][2] for the list of possible
 categories).
 
-Now upload all the library.properties files inside the arduino_libs subfolder
+Then upload all the library.properties files inside the arduino_libs subfolder
 hiearchy:
 
     python upload_properties.py --root arduino_libs adafruit
 
-Create and tag a 1.0.0 release for each library on Github by running (again
-notice the input is piped in from the list of libraries generated earlier):
+The --root parameter specifies a folder that is the root of the library.properties
+files (i.e. the output of the last command).  The Github user/organization is
+specified in the only positional parameter.
+
+Now create and tag a 1.0.0 release for each library on Github by running:
 
     python create_releases.py adafruit < adafruit_arduino_libraries.txt
 
-Finally generate the list of Arduino library URLs to send to the Arduino team.
-The output will be piped to a file adafruit_arduino_library_urls.txt that is
-in the formated needed by the Arduino library system.
+The only parameter is the name of the Github user/organization, and again notice
+the list of Arduino libraries to process is piped in to standard input from the
+list generated earlier.
+
+Finally generate the list of Arduino library URLs to send to the Arduino team:
 
     python generate_list.py adafruit < adafruit_arduino_libraries.txt > adafruit_arduino_library_urls.txt
+
+The Github user/organization is specified as a parameter, then the input file is
+piped to standard input and the output list is piped to a file.
 
 Now send the adafruit_arduino_library_urls.txt file to the Arduino team in an
 issue on their Github repository (see [this page][4] for details)!
 
-Be aware that as Arduino libraries are changed on your Github repository they
-will NOT be automatically picked up by Arduino's library system.  Only when a
-new tagged release is created will Arduino pick up the library as new.  For
-example if a library has a tagged release with version 1.0.0 and new fixes are
+After your libraries are visible in Arduino's manager be aware as they are changed 
+on your Github repository they will NOT be automatically picked up by Arduino's library system.
+Only when a new tagged release is created will Arduino pick up the library as updated.
+
+For example if a library has a tagged release with version 1.0.0 and new fixes are
 integrated then be sure to create a new tagged release with a higher version,
 like 1.0.1, after integrating the fixes.  Arduino's library system should pick
 up the new tag & release after processing the library again (apparently happens
