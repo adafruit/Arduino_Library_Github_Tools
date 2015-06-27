@@ -46,7 +46,7 @@ Dependencies
 You will need the [PyGithub module][5] installed to use these scripts.  The 
 easiest way to install this module is with [pip][6], using the command:
 
-    sudo pip install github
+    sudo pip install pygithub
 
 (omit the sudo on Windows)
 
