@@ -30,9 +30,9 @@ The scripts in this repository will help automate all three steps of the
 process above for a potentially large number of Arduino libraries that a Github
 user/organization owns.
 
-[0]: https://github.com/arduino/Arduino/wiki/Library-Manager-FAQ
+[0]: https://github.com/arduino/library-registry/blob/main/FAQ.md#readme
 
-[1]: https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5:-Library-specification
+[1]: https://arduino.github.io/arduino-cli/0.35/library-specification/#15-library-format-rev-22
 
 [2]: https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5:-Library-specification#libraryproperties-file-format
 
