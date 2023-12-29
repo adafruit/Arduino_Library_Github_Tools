@@ -52,7 +52,7 @@ easiest way to install this module is with [pip][6], using the command:
 
 [5]: https://github.com/PyGithub/PyGithub
 
-[6]: https://pip.pypa.io/en/latest/installing.html
+[6]: https://pip.pypa.io/en/latest/installation/
 
 Usage
 -----
