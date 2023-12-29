@@ -34,11 +34,11 @@ user/organization owns.
 
 [1]: https://arduino.github.io/arduino-cli/0.35/library-specification/#15-library-format-rev-22
 
-[2]: https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5:-Library-specification#libraryproperties-file-format
+[2]: https://arduino.github.io/arduino-cli/0.35/library-specification/#libraryproperties-file-format
 
 [3]: http://semver.org/
 
-[4]: https://github.com/arduino/Arduino/wiki/Library-Manager-FAQ#how-can-i-add-my-library-to-library-manager
+[4]: https://github.com/arduino/library-registry/blob/main/FAQ.md#how-can-i-add-a-library-to-library-manager
 
 Dependencies
 ------------
