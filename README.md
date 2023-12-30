@@ -32,7 +32,7 @@ user/organization owns.
 
 [0]: https://github.com/arduino/library-registry/blob/main/FAQ.md#readme
 
-[1]: https://arduino.github.io/arduino-cli/0.35/library-specification/#15-library-format-rev-22
+[1]: https://arduino.github.io/arduino-cli/latest/library-specification/#15-library-format-rev-22
 
 [2]: https://arduino.github.io/arduino-cli/0.35/library-specification/#libraryproperties-file-format
 
