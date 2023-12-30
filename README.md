@@ -30,15 +30,15 @@ The scripts in this repository will help automate all three steps of the
 process above for a potentially large number of Arduino libraries that a Github
 user/organization owns.
 
-[0]: https://github.com/arduino/Arduino/wiki/Library-Manager-FAQ
+[0]: https://github.com/arduino/library-registry/blob/main/FAQ.md#readme
 
-[1]: https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5:-Library-specification
+[1]: https://arduino.github.io/arduino-cli/latest/library-specification/#15-library-format-rev-22
 
-[2]: https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5:-Library-specification#libraryproperties-file-format
+[2]: https://arduino.github.io/arduino-cli/latest/library-specification/#libraryproperties-file-format
 
 [3]: http://semver.org/
 
-[4]: https://github.com/arduino/Arduino/wiki/Library-Manager-FAQ#how-can-i-add-my-library-to-library-manager
+[4]: https://github.com/arduino/library-registry/blob/main/FAQ.md#how-can-i-add-a-library-to-library-manager
 
 Dependencies
 ------------
@@ -52,7 +52,7 @@ easiest way to install this module is with [pip][6], using the command:
 
 [5]: https://github.com/PyGithub/PyGithub
 
-[6]: https://pip.pypa.io/en/latest/installing.html
+[6]: https://pip.pypa.io/en/latest/installation/
 
 Usage
 -----
