@@ -34,7 +34,7 @@ user/organization owns.
 
 [1]: https://arduino.github.io/arduino-cli/latest/library-specification/#15-library-format-rev-22
 
-[2]: https://arduino.github.io/arduino-cli/0.35/library-specification/#libraryproperties-file-format
+[2]: https://arduino.github.io/arduino-cli/latest/library-specification/#libraryproperties-file-format
 
 [3]: http://semver.org/
 
